@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class BlogDisplay extends Component {
   constructor(props) {
@@ -15,17 +16,22 @@ class BlogDisplay extends Component {
 
   async componentDidMount() {
     let blog = await fetch(`/api/blogs/${this.id}`);
-    let blogJson = await blogs.json();
+    let blogJson = await blog.json();
     this.setState({ blog: blogJson });
   }
 
   render() {
     return (
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">{this.blog.title}</h5>
-          <p className="card-text">{this.blog.content}</p>
+      <div className="container">
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">{this.state.blog.title}</h5>
+            <p className="card-text">{this.state.blog.content}</p>
+          </div>
         </div>
+        <Link to="/">
+          <button className="btn btn-primary">Go back</button>
+        </Link>
       </div>
     );
   }

@@ -6,7 +6,19 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      blogs: []
+    };
+
+    this.refresh = async () => {
+      let blogs = await fetch("/api/blogs/");
+      let blogsJson = await blogs.json();
+      this.setState({ blogs: blogsJson });
+    }  
+  }
+
+  componentDidMount() {
+    this.refresh();
   }
 
   render() {
@@ -14,10 +26,10 @@ class Home extends Component {
       <div className="container">
         <div className="row">
           <div className="col col-xs-8">
-            <BlogList />
+            <BlogList blogs={this.state.blogs} />
           </div>
           <div className="col col-xs-4">
-            <BlogInput />
+            <BlogInput refresh={this.refresh} />
           </div>
         </div>
       </div>

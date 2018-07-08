@@ -1,25 +1,17 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom';
 
 class BlogList extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      blogs: []
-    };
-  }
-
-  async componentDidMount() {
-    let blogs = await fetch("/api/blogs/");
-    let blogsJson = await blogs.json();
-    this.setState({ blogs: blogsJson });
+    this.props = props;
   }
 
   render() {
-    let blogs = this.state.blogs.map(blog => {
-      let id = blog.id;
+    let blogs = this.props.blogs.map(blog => {
+      let id = `/${blog.id}`;
       return (
-        <div className="card">
+        <div className="card" key={id}>
           <div className="card-body">
             <h5 className="card-title">{blog.title}</h5>
             <Link to={id}>

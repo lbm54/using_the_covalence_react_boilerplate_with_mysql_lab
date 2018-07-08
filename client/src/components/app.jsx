@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import BlogDisplay from './BlogDisplay';
+import Home from './Home';
 
 class Navigation extends Component {
 
